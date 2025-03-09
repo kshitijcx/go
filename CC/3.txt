@@ -1,0 +1,46 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	name := "kshitij"
+	printMe(name)
+	fmt.Println(add(3, 5))
+	var n1, n2 int = addNsub(6, 3)
+	fmt.Println(n1, n2)
+	fmt.Printf("add: %v sub: %v\n", n1, n2)
+
+	var res, err = divide(2, 0)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("Division", res)
+	}
+	//swtich and conditional switch
+}
+
+func printMe(name string) {
+	fmt.Println("name", name)
+}
+
+// with return type
+func add(a int, b int) int {
+	return a + b
+}
+
+// with multiple return types
+func addNsub(a int, b int) (int, int) {
+	return a + b, a - b
+}
+
+func divide(a int, b int) (int, error) {
+	var err error
+	if b == 0 {
+		err = errors.New("cannot divide by 0")
+		return 0, err
+	}
+	return a / b, err
+}
