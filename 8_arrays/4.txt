@@ -26,7 +26,7 @@ func main() {
 	var intSlice2 []int32 = []int32{8, 9}
 	intSlice = append(intSlice, intSlice2...) //spread operator
 
-	// var intSlice3 = make([]int32, 3, 6) //datatype, size, capacity of slice
+	// var intSlice3 = make([]int32, 3, 6) //datatype, size, capacity of slice //faster if preallocated size
 
 	//map key:value pairs
 	var myMap = map[string]uint8{"ram": 32, "sam": 75}

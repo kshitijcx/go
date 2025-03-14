@@ -1,0 +1,70 @@
+package main
+
+import "fmt"
+
+//structs and interfaces
+type gasEngine struct {
+	mpg       uint8
+	gallons   uint8
+	ownerInfo owner //struct inside struct //owner.name
+	// owner //.name access but initailized in the same way as before
+	//int //int field of type int
+}
+
+type owner struct {
+	name string
+}
+
+type electricEngine struct {
+	mpkwh uint8
+	kwh   uint8
+}
+
+//methods -> tied to structs
+//e is item of time gasEngine
+//it can access object properties
+func (e gasEngine) milesLeft() uint8 {
+	return e.gallons * e.mpg
+}
+
+func (e electricEngine) milesLeft() uint8 {
+	return e.kwh * e.mpkwh
+}
+
+//interfaces
+//makes it applicable to all engine types
+//earlier canMakeIt only worked on gasEngine
+type engine interface {
+	milesLeft() uint8
+}
+
+func canMakeIt(e engine /*e gasEngine*/, miles uint8) {
+	if miles < e.milesLeft() {
+		fmt.Println("yes")
+	} else {
+		fmt.Println("no")
+	}
+}
+
+func main() {
+	//var myEngine gasEngine //default 0 for both
+	// var myEngine gasEngine = gasEngine{mpg: 10, gallons: 5,}
+	// var myEng gasEngine = gasEngine{20,14,owener{"ram"}}
+	//myOrder:=order{...}
+	var myEng gasEngine
+	myEng.mpg = 30
+	myEng.gallons = 20
+	myEng.ownerInfo.name = "ram"
+	fmt.Println(myEng)
+
+	//anonymous struct, no reusable
+	var newEng = struct {
+		mpg     uint8
+		gallons uint8
+	}{25, 15}
+	fmt.Println(newEng)
+
+	//methods and structs
+	fmt.Println(myEng.milesLeft())
+	canMakeIt(myEng, 50)
+}
